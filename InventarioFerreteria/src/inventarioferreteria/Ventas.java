@@ -1,0 +1,57 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package inventarioferreteria;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author Mari
+ */
+public class Ventas implements Serializable { 
+  ArrayList<Venta> listaVentas = new ArrayList<>();
+  
+  public Ventas(){    
+  }
+  
+  public void mostrarVentas() throws IOException {
+    Venta v = new Venta();
+    for (int i = 0; i < listaVentas.size(); i++) {
+      v = listaVentas.get(i);
+      v.toString();
+    }
+  }    
+ 
+  public void buscarVentaPorFecha() {
+    Teclado t = new Teclado();
+    System.out.println("Ingrese la fecha de la que dese recuperar las ventas con el formato aaaa-mm-dd");
+    String nuevaFecha = t.leerString();
+    Venta v = new Venta();
+    for (int i = 0; i < listaVentas.size(); i++) {
+      v = listaVentas.get(i);
+      if (v.getFecha() == nuevaFecha) {
+        v.toStringVoid();
+      }
+    }
+  }
+  
+  public void buscarVentaPorPeriodo(){
+    
+  }
+  
+   private void writeObject(ObjectOutputStream out) throws IOException {
+    out.defaultWriteObject();
+  }
+
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+  }
+  
+}
