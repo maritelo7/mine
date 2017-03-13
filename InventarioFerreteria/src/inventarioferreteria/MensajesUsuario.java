@@ -14,67 +14,85 @@ import java.io.IOException;
  * @version 1.0 feb 21 2017
  */
 public class MensajesUsuario {
+    Teclado tec = new Teclado();
+    Producto pro = new Producto();
+    Inventario in = new Inventario();
+    MensajesUsuario mu = new MensajesUsuario();
+    SerializacionProducto sp;
+    SerializacionVenta sv = new SerializacionVenta();
+    Venta v = new Venta();
+    Ventas ves = new Ventas();
 
+  
   /**
    * Imprime las opciones en pantalla
    */
-  public void menu() {
+  public void menu(){
     System.out.println("SISTEMA COMPRA-VENTA DE LA FERRETERÍA");
     System.out.println("Escoga una opción:");
-    System.out.println("1. Registro de compra y consulta de productos");
-    System.out.println("2. Registro venta");
+    System.out.println("1. Consulta de inventario");
+    System.out.println("2. Control de productos");
+    System.out.println("3. Control de ventas");
     System.out.println("0. SALIR");
   }
-
+  
+  public void menuInventario(){
+    System.out.println("1. Mostrar inventario por orden alfabetico");
+    System.out.println("2. Mostrar inventario por clave");
+    System.out.println("3. Buscar producto por nombre");
+    System.out.println("4. Buscar producto por clave");
+    System.out.println("5. Buscar producto por descripción");
+    System.out.println("6. Mostrar valor total del inventario");
+    System.out.println("0. REGRESAR");
+  }
+  
   public void menuCompra() {
     System.out.println("1. Agregrar producto a inventario");
     System.out.println("2. Eliminar producto de inventario");
     System.out.println("3. Modificar características de un producto");
-    System.out.println("4. Mostrar inventario por orden alfabetico");
-    System.out.println("5. Mostrar inventario por clave");
-    System.out.println("6. Buscar producto de inventario por nombre");
-    System.out.println("7. Buscar producto de inventario por clave");
-    System.out.println("8. Mostrar valor total del inventario");
     System.out.println("0. REGRESAR");
   }
 
-  public void menuVenta() {
+  public void menuVenta(){
     System.out.println("1. Realizar venta");
-    System.out.println("2. Mostrar ventas");
+    System.out.println("2. Mostrar todas las ventas");
+    System.out.println("3. Consultar ventas por fecha");
     System.out.println("0. REGRESAR");
   }
 
-  /**
-   * Para leer enteros de la entrada estándar
-   *
-   * @return
-   */
-  public int leerOpcion() {
-    Teclado tec = new Teclado();
-    System.out.println("¿Cuál es tu opción?");
-    return tec.leerEntero();
-  }
-
-  public void escogerVentaCompra(int op, Venta v, Ventas ves) throws IOException {
-    switch (op) {
+   public void realizarOpcionMenuInventario(int op) throws IOException, FileNotFoundException, ClassNotFoundException {
+    switch (op){
       case 1:
-        v.realizarVenta();
+        in.ordenarPorNombre();
         break;
       case 2:
-        ves.mostrarVentas();
+        in.ordenarPorClave();
         break;
       case 3:
-        ves.buscarVentaPorFecha();
-      default:
+        System.out.println("Ingrese el nombre del producto que desea buscar ");
+        in.buscarNombre(tec.leerString());
         break;
-
+      case 4:
+        System.out.println("Ingrese la clave del producto que desea buscar ");
+        in.buscarClave(tec.leerEntero());
+        break;
+      case 5:
+        System.out.println("Ingrese la descripción del producto que desea buscar ");
+        in.buscarNombre(tec.leerString());
+        break;
+      case 6:
+        System.out.println("El valor total del inventario es: " + in.mostrarValorInventario());
+        break;
+      case 0:
+        sp.serializar(in);
+        break;
+      default:
+        System.out.println("Ingresa opción válida");
+        break;
     }
   }
-
-  public void realizarOpcion(int op, Teclado tec, Producto pro, Inventario in, SerializacionProducto sp, SerializacionVenta sv) throws IOException, FileNotFoundException, ClassNotFoundException {
-    if (!sp.comprobarExistenciaFichero()) {
-      in = sp.deserializar();      
-    }
+  
+   public void realizarOpcionMenuCompra(int op){
     switch (op) {
       case 1:
         try {
@@ -105,32 +123,39 @@ public class MensajesUsuario {
         int caracteristica = tec.leerEntero();
         in.cambiarCaracteristica(caracteristica, tec, clave);
         break;
-      case 4:
-        in.ordenarPorNombre();
-        break;
-      case 5:
-        in.ordenarPorClave();
-        break;
-      case 6:
-        System.out.println("Ingrese el nombre del producto que desea buscar ");
-        in.buscarNombre(tec.leerString());
-        break;
-      case 7:
-        System.out.println("Ingrese la clave del producto que desea buscar ");
-        in.buscarClave(tec.leerEntero());
-        break;
-      case 8:
-        System.out.println("El valor total del inventario es: " + in.mostrarValorInventario());
-        break;
-      case 0:
-        sp.serializar(in);
-        System.out.println("Saliendo del programa");
-        break;
       default:
+        System.out.println("Ingrese opción válida");
+        break;
+    }
+  }
+  
+  public void realizarOpcionMenuVenta(int op) throws IOException {
+    switch (op) {
+      case 1:
+        v.realizarVenta();
+        break;
+      case 2:
+        ves.mostrarVentas();
+        break;
+      case 3:
+        ves.buscarVentaPorFecha();
+      default:
+        System.out.println("Ingresa opción válida");
         break;
     }
   }
 
+    /**
+   * Para leer enteros de la entrada estándar
+   *
+   * @return
+   */
+  public int leerOpcion() {
+    Teclado te = new Teclado();
+    System.out.println("¿Cuál es tu opción?");
+    return te.leerEntero();
+  }
+  
   public void caracteristicas() {
     System.out.println("Escriba el número de la característica que quiere editar:");
     System.out.println("1. Nombre");

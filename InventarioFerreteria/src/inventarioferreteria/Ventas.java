@@ -17,12 +17,13 @@ import java.util.ArrayList;
  */
 public class Ventas implements Serializable { 
   ArrayList<Venta> listaVentas = new ArrayList<>();
+  Venta v;
   
   public Ventas(){    
   }
   
   public void mostrarVentas() throws IOException {
-    Venta v = new Venta();
+    v = new Venta();
     for (int i = 0; i < listaVentas.size(); i++) {
       v = listaVentas.get(i);
       v.toString();
@@ -33,7 +34,7 @@ public class Ventas implements Serializable {
     Teclado t = new Teclado();
     System.out.println("Ingrese la fecha de la que dese recuperar las ventas con el formato aaaa-mm-dd");
     String nuevaFecha = t.leerString();
-    Venta v = new Venta();
+    v = new Venta();
     for (int i = 0; i < listaVentas.size(); i++) {
       v = listaVentas.get(i);
       if (v.getFecha() == nuevaFecha) {
