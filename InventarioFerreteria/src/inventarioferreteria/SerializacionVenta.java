@@ -5,26 +5,17 @@
  */
 package inventarioferreteria;
 
+
 import java.io.*;
 import java.util.logging.*;
 /**
  *
  * @author Mari
  */
-public class SerializacionVenta {
-  
+public class SerializacionVenta {  
 String filename = "Ventas.txt";
 
-public Ventas comprobarExistenciaFichero() throws IOException{
-  File f = new File(filename);
-  Ventas ves;
-  if (!f.exists()){
-    f.createNewFile();
-    ves = new Ventas();
-    return ves;
-  }else{
-   return deserializar();
-  }
+public void SerializacionVenta(){
 }
 
   public void serializar(Ventas ves) {

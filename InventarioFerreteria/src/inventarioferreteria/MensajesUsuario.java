@@ -5,6 +5,8 @@
  */
 package inventarioferreteria;
 
+import static inventarioferreteria.Ferreteria.inventarioVacio;
+import static inventarioferreteria.Ferreteria.ventasVacias;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -14,14 +16,13 @@ import java.io.IOException;
  * @version 1.0 feb 21 2017
  */
 public class MensajesUsuario {
-    Teclado tec = new Teclado();
-    Producto pro = new Producto();
+    Teclado tec;
+    Producto pro;
     Inventario in = new Inventario();
-    MensajesUsuario mu = new MensajesUsuario();
     SerializacionProducto sp;
-    SerializacionVenta sv = new SerializacionVenta();
-    Venta v = new Venta();
-    Ventas ves = new Ventas();
+    SerializacionVenta sv;
+    Venta v;
+    Ventas vs;
 
   
   /**
@@ -61,7 +62,10 @@ public class MensajesUsuario {
   }
 
    public void realizarOpcionMenuInventario(int op) throws IOException, FileNotFoundException, ClassNotFoundException {
-    switch (op){
+      tec = new Teclado();
+      sp = new SerializacionProducto();
+      in = sp.deserializar();
+     switch (op){
       case 1:
         in.ordenarPorNombre();
         break;
@@ -84,7 +88,6 @@ public class MensajesUsuario {
         System.out.println("El valor total del inventario es: " + in.mostrarValorInventario());
         break;
       case 0:
-        sp.serializar(in);
         break;
       default:
         System.out.println("Ingresa opción válida");
@@ -92,7 +95,14 @@ public class MensajesUsuario {
     }
   }
   
-   public void realizarOpcionMenuCompra(int op){
+   public void realizarOpcionMenuCompra(int op) throws IOException{
+    tec = new Teclado();
+    sp = new SerializacionProducto();
+    if (!inventarioVacio) {
+      in = sp.deserializar();
+    }else{
+      in = new Inventario();
+    }
     switch (op) {
       case 1:
         try {
@@ -103,25 +113,33 @@ public class MensajesUsuario {
           System.out.println("Ingrese precio de compra unitario");
           double precio = tec.leerDouble();
           System.out.println("Ingrese tipo unidad de medida: pza, docena, litros, metros, kilogramos");
+          tec.leerString();
           String unidadMedida = tec.leerString();
           System.out.println("Añadir descripción");
           String des = tec.leerString();
           pro = new Producto(nombre, des, cant, precio, unidadMedida); 
+          inventarioVacio = false;
           in.lista.add(pro);
           sp.serializar(in);
-        } catch (Exception e) {
+          in.ordenarPorNombre();
+        } catch (IOException | ClassNotFoundException e) {
         }
         break;
       case 2:
         System.out.println("Escriba la clave del producto a eliminar");
-        in.eliminar(tec.leerEntero());
+        int clave =  tec.leerEntero();
+        in.eliminar(clave);
+        sp.serializar(in);
         break;
       case 3:
         System.out.println("Escriba la clave del producto a editar");
-        int clave = tec.leerEntero();
+        clave = tec.leerEntero();
         caracteristicas();
         int caracteristica = tec.leerEntero();
-        in.cambiarCaracteristica(caracteristica, tec, clave);
+        in.cambiarCaracteristica(caracteristica, clave);
+        sp.serializar(in);
+        break;
+      case 0:
         break;
       default:
         System.out.println("Ingrese opción válida");
@@ -130,15 +148,35 @@ public class MensajesUsuario {
   }
   
   public void realizarOpcionMenuVenta(int op) throws IOException {
+    tec = new Teclado();
+    sv = new SerializacionVenta();
+    if (!ventasVacias) {
+      vs = sv.deserializar();
+    }
     switch (op) {
       case 1:
-        v.realizarVenta();
+        int claveProd = 0;
+        int cantidad = 0;
+        v = new Venta();
+        System.out.println("CUANDO TERMINE DE REGISTRAR VENTA PRESIONE 0 (CERO)");
+        do{
+          System.out.println("Clave producto:");
+          claveProd = tec.leerEntero();
+          System.out.println("Cantidad");
+          cantidad = tec.leerEntero();
+          vs = v.realizarVenta(claveProd, cantidad, vs);
+          ventasVacias = false;
+        }while(claveProd != 0 || cantidad  != 0);
+        sv.serializar(vs);
         break;
       case 2:
-        ves.mostrarVentas();
+        vs.mostrarVentas();
         break;
       case 3:
-        ves.buscarVentaPorFecha();
+        vs.buscarVentaPorFecha();
+      case 0:
+        
+        break;
       default:
         System.out.println("Ingresa opción válida");
         break;

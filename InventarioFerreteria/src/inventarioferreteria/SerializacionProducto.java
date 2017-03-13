@@ -14,29 +14,23 @@ import java.util.logging.Logger;
  * @author Maribel Tello Rodríguez
  * @version 1.0 feb 21 2017
  */
-public class SerializacionProducto {
-  
+public class SerializacionProducto {  
 public String filename = "Inventario.txt";
 
-public SerializacionProducto() throws IOException{
-  
+public SerializacionProducto() throws IOException{  
 }
 
-public boolean comprobarExistenciaFichero() throws IOException{
-  File f = new File(filename);
-  if (!f.exists()){
-    f.createNewFile();
-    return false;
-  }else
-  return true;
+public void SerializacionProducto(){
 }
+
+//public boolean comprobarExistenciaFichero() throws IOException{}
 
   public void serializar(Inventario in) {
     try {
-      FileOutputStream fo = new FileOutputStream(filename);
-      ObjectOutputStream so = new ObjectOutputStream(fo);
-      so.writeObject(in);
-      so.flush();
+      ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(filename));
+      os.writeObject(in);
+      os.flush(); 
+      os.close();      
     } catch (Exception e) {
       System.out.println(e);
       System.exit(1);

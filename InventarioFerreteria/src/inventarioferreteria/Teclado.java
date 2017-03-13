@@ -5,13 +5,14 @@
  */
 package inventarioferreteria;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  * @author Maribel Tello Rodríguez
  * @version 1.0 feb 21 2017
  */
-public class Teclado {
+public class Teclado implements Serializable {
     private final Scanner sc;
      /**
      * Inicializa la clase Scanner con la entrada estándar que es la lectura desde el teclado
@@ -35,7 +36,7 @@ public class Teclado {
     }
     
     public String leerString(){
-        return sc.next();
+        return sc.nextLine();
     }
     
 }

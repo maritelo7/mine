@@ -21,7 +21,6 @@ import java.util.Arrays;
  */
 public class Inventario implements Serializable  {
   public ArrayList<Producto> lista = new ArrayList<>();
-  Producto prod;
   /**
    * Constructor de la clase inventario
    */
@@ -32,6 +31,7 @@ public class Inventario implements Serializable  {
   * @param clave 
   */
  public void eliminar(int clave) {
+   Producto prod = new Producto();
     for (int i = 0; i < lista.size(); i++) {
       prod = lista.get(i);
       if (prod.getClave() == clave) {
@@ -48,7 +48,10 @@ public class Inventario implements Serializable  {
  * @param tec
  * @param clave 
  */
-  public void cambiarCaracteristica(int car, Teclado tec, int clave) {
+  public void cambiarCaracteristica(int car, int clave) {
+    Teclado tec = new Teclado();
+    Producto prod = new Producto();
+    tec = new Teclado();
       for (int i = 0; i < lista.size(); i++) {
         prod = lista.get(i);
         if (clave == prod.getClave()){     
@@ -86,6 +89,7 @@ public class Inventario implements Serializable  {
   }
 
   public void ordenarPorClave() throws IOException, FileNotFoundException, ClassNotFoundException {
+    Producto prod = new Producto();
     int[] arr = bubbleClave();
     for (int i = 0; i < arr.length; i++) {
       for (int j = 0; j < lista.size(); j++) {
@@ -98,6 +102,7 @@ public class Inventario implements Serializable  {
   }
   
   public int[] bubbleClave() {
+    Producto prod = new Producto();
     boolean swapped = true;
     int j = 0;
     int tmp;
@@ -122,6 +127,7 @@ public class Inventario implements Serializable  {
 }
   
    public void ordenarPorNombre() throws IOException, FileNotFoundException, ClassNotFoundException {
+   Producto prod = new Producto();
    ArrayList<Producto> aux = lista;
    String[] arr = bubbleNombre();
     for(int i = 0; i < arr.length; i++) {
@@ -135,6 +141,7 @@ public class Inventario implements Serializable  {
   }
    
     public String[] bubbleNombre() {
+      Producto prod = new Producto();
     String[] arr = new String[lista.size()];
     for (int i = 0; i < lista.size(); i++) {
       prod = lista.get(i);
@@ -145,6 +152,7 @@ public class Inventario implements Serializable  {
 }
    
    public boolean buscarClave(int claveBuscada){
+     Producto prod = new Producto();
      boolean encontrado = false;
       for (int j = 0; j < lista.size(); j++) {
         prod = lista.get(j);
@@ -160,6 +168,7 @@ public class Inventario implements Serializable  {
    }
    
     public void buscarNombre(String nombreBuscado){
+      Producto prod = new Producto();
      boolean encontrado = false;
       for (int j = 0; j < lista.size(); j++) {
         prod = lista.get(j);
@@ -174,6 +183,7 @@ public class Inventario implements Serializable  {
    }
     
  public double mostrarValorInventario(){
+   Producto prod = new Producto();
    double suma = 0;
    for (int i = 0; i < lista.size(); i++) {
      prod = lista.get(i);
