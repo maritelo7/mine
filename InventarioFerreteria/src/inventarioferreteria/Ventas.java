@@ -26,7 +26,7 @@ public class Ventas implements Serializable {
     v = new Venta();
     for (int i = 0; i < listaVentas.size(); i++) {
       v = listaVentas.get(i);
-      v.toString();
+      v.toStringVoid();
     }
   }    
  
@@ -37,15 +37,12 @@ public class Ventas implements Serializable {
     v = new Venta();
     for (int i = 0; i < listaVentas.size(); i++) {
       v = listaVentas.get(i);
-      if (v.getFecha() == nuevaFecha) {
+      if (v.getFecha().contentEquals(nuevaFecha)) {
         v.toStringVoid();
       }
     }
   }
   
-  public void buscarVentaPorPeriodo(){
-    
-  }
   
    private void writeObject(ObjectOutputStream out) throws IOException {
     out.defaultWriteObject();

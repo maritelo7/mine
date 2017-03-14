@@ -22,7 +22,7 @@ public class MensajesUsuario {
     SerializacionProducto sp;
     SerializacionVenta sv;
     Venta v;
-    Ventas vs;
+    Ventas ves;
 
   
   /**
@@ -82,7 +82,7 @@ public class MensajesUsuario {
         break;
       case 5:
         System.out.println("Ingrese la descripción del producto que desea buscar ");
-        in.buscarNombre(tec.leerString());
+        in.buscarDescripcion(tec.leerString());
         break;
       case 6:
         System.out.println("El valor total del inventario es: " + in.mostrarValorInventario());
@@ -148,10 +148,14 @@ public class MensajesUsuario {
   }
   
   public void realizarOpcionMenuVenta(int op) throws IOException {
+    sp = new SerializacionProducto();
+    in = sp.deserializar();
     tec = new Teclado();
     sv = new SerializacionVenta();
     if (!ventasVacias) {
-      vs = sv.deserializar();
+      ves = sv.deserializar();
+    }else{
+      ves = new Ventas();
     }
     switch (op) {
       case 1:
@@ -162,20 +166,25 @@ public class MensajesUsuario {
         do{
           System.out.println("Clave producto:");
           claveProd = tec.leerEntero();
+          if (claveProd != 0){
           System.out.println("Cantidad");
           cantidad = tec.leerEntero();
-          vs = v.realizarVenta(claveProd, cantidad, vs);
-          ventasVacias = false;
-        }while(claveProd != 0 || cantidad  != 0);
-        sv.serializar(vs);
+          in = v.realizarVenta(claveProd, cantidad, ves, in);
+          ventasVacias = false;          
+        }
+        }while(claveProd != 0);
+        v.setTotalVenta();
+        v.setFecha();
+        v.setFolio();
+        sv.serializar(ves);
+        sp.serializar(in);
         break;
-      case 2:
-        vs.mostrarVentas();
+      case 2:        
+        ves.mostrarVentas();
         break;
-      case 3:
-        vs.buscarVentaPorFecha();
-      case 0:
-        
+      case 3:        
+        ves.buscarVentaPorFecha();
+      case 0:        
         break;
       default:
         System.out.println("Ingresa opción válida");

@@ -15,15 +15,15 @@ import java.util.logging.*;
 public class SerializacionVenta {  
 String filename = "Ventas.txt";
 
-public void SerializacionVenta(){
+public void SerializacionVenta() throws IOException{
 }
 
   public void serializar(Ventas ves) {
     try {
-      FileOutputStream fo = new FileOutputStream(filename);
-      ObjectOutputStream so = new ObjectOutputStream(fo);
-      so.writeObject(ves);
-      so.flush();
+      ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(filename));
+      os.writeObject(ves);
+      os.flush(); 
+      os.close();
     } catch (Exception e) {
       System.out.println(e);
       System.exit(1);
@@ -31,7 +31,6 @@ public void SerializacionVenta(){
   }
 
   public Ventas deserializar() {
-    //ArrayList<Producto> list = new ArrayList();
     Ventas ves = new Ventas();
     FileInputStream fi;
     try {

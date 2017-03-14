@@ -159,11 +159,10 @@ public class Inventario implements Serializable  {
         if (claveBuscada == (prod.getClave())){
         System.out.println(prod);
         encontrado = true;
-        }
+        }}
       if (encontrado == false) {
         System.out.println("Producto no encontrado");
         }
-      }
     return encontrado;      
    }
    
@@ -181,6 +180,24 @@ public class Inventario implements Serializable  {
           System.out.println("Producto no encontrado");
       }
    }
+    
+  public void buscarDescripcion(String buscado) {
+    Producto prod = new Producto();
+    boolean encontrado = false;
+    for (int j = 0; j < lista.size(); j++) {
+       prod = lista.get(j);
+      String descripcion = prod.getDescripcion();
+      descripcion = descripcion.toLowerCase();
+      if (descripcion.contains(buscado.toLowerCase())) {
+        System.out.println(prod);
+        encontrado = true;
+      }
+    }
+    if (encontrado == false) {
+      System.out.println("Producto no encontrado");
+    }
+    }
+      
     
  public double mostrarValorInventario(){
    Producto prod = new Producto();

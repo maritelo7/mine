@@ -44,15 +44,16 @@ public class FolioVentas {
     }
     
     public static void addCont(String cont) throws IOException{
-        try{
-        cont = getC();        
-        contador = Integer.parseInt(cont);
-        contador++;    
-        cont=contador+"";
-        FileWriter fw = new FileWriter(c);        
-        fw.append(cont);
-        fw.close();
-        }catch(NumberFormatException e){}
-    
-}
+     try {
+      cont = getC();
+      contador = Integer.parseInt(cont);
+      contador++;
+      cont = contador + "";
+      FileWriter fw = new FileWriter(c);
+      fw.append(cont);
+      fw.close();
+    } catch (NumberFormatException e) {
+    }
+
+  }
 }

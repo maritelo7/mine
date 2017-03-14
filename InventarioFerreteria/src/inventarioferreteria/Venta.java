@@ -5,9 +5,8 @@
  */
 package inventarioferreteria;
 
-import java.io.File;
+
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.Date;
  * @version 1.0 feb 21 2017
  */
 public class Venta implements Serializable {
-  private ArrayList<Producto> listaProductos = new ArrayList<>();
+  protected ArrayList<ProductoVenta> listaProductos = new ArrayList<>();
   private int folio = 0;
   private double totalVenta = 0.0;
   private String fecha;
@@ -27,7 +26,7 @@ public class Venta implements Serializable {
   public Venta() {
   }
 
-  public ArrayList<Producto> getArrayList() {
+  public ArrayList<ProductoVenta> getArrayList() {
     return listaProductos;
   }
 
@@ -39,69 +38,82 @@ public class Venta implements Serializable {
     return totalVenta;
   }
 
-  public String setFecha() {
+  public void setFecha() {
     String pattern = "yyyy-MM-dd";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
     String date = simpleDateFormat.format(new Date());
-    System.out.println(date);
-    return date;
+    this.fecha = date;
   }
+  
 
   public String getFecha() {
     return fecha;
   }
-
-  public Ventas realizarVenta(int claveProd, int cantidad, Ventas vs) throws IOException {
-    FolioVentas fv = new FolioVentas();
-    Inventario in = new Inventario();
+  
+  public void setTotalVenta(){
+    double total = 0.0;
+    ProductoVenta prodVenta = new ProductoVenta();
+    for (int i = 0; i < listaProductos.size(); i++) {
+      prodVenta = listaProductos.get(i);
+      total = this.totalVenta + prodVenta.getSubtotal();
+    }
+    this.totalVenta = total;
+  }
+  
+  public Inventario realizarVenta(int claveProd, int cantidad, Ventas ves, Inventario in) throws IOException {
     Producto prod = new Producto();
-    Producto aux = new Producto();
+    ProductoVenta prodVenta = new ProductoVenta();
     Teclado t = new Teclado();
     SerializacionVenta sv;
-    Ventas ves;
     double precio = 0.0;
     boolean encontrado = false;
+    boolean suficiente = false;
     double totalArticulo = 0;
-    folio = Integer.valueOf(fv.getC());
-    encontrado = in.buscarClave(claveProd);
-    if (encontrado) {
-      if (prod.getExistencia() >= cantidad) {
-        prod.setExistencia(prod.getExistencia() - cantidad);
-        aux = prod;
-        precio = (prod.getPrecioCompra() * .70) + prod.getPrecioCompra();
-        aux.setPrecioCompra(precio);
-        totalArticulo = precio * cantidad;
-        aux.setTotal(totalArticulo);
-        aux.setExistencia(cantidad);
-        totalVenta = totalVenta + totalArticulo;
-        listaProductos.add(aux);
-        fecha = setFecha();
-        sv = new SerializacionVenta();
-        vs.listaVentas.add(this);
-       // sv.serializar(vs);
-      } else {
-        System.out.println("No hay suficientes artículos en existencia");
-        encontrado = false;
-      }
-    } else {
-      System.out.println("No se encontró producto con esa clave");
+      for (int i = 0; i < in.lista.size(); i++) {
+        prod = in.lista.get(i);
+        if(prod.getClave() == claveProd){
+          encontrado=true;
+          if (prod.getExistencia() >= cantidad) {
+          suficiente = true;
+          int existencia = prod.getExistencia() - cantidad;
+          prod.setExistencia(existencia);
+          prodVenta.setCantidad(cantidad);
+          precio = (prod.getPrecioCompra() * .70) + prod.getPrecioCompra();
+          prodVenta.setPrecioUnitario(precio);
+          totalArticulo = precio * cantidad;
+          prodVenta.setSubtotal(totalArticulo);
+          prodVenta.setNombre(prod.getNombre());
+          listaProductos.add(prodVenta);
+          ves.listaVentas.add(this);         
+      } 
     }
-
-    return vs;
+    } if (encontrado == false) {
+      System.out.println("No se encontró producto con esa clave");
+    } else { 
+      if (suficiente == false){
+      System.out.println("No hay suficiente cantidad de unidades de ese artículo");
+    }}
+    return in;
   }
 
-  public void toStringVoid() {
-    Producto prod = new Producto();
-    System.out.println("Comprobante de venta num.: " + folio);
+  public void toStringVoid () {
+    ProductoVenta prodVenta = new ProductoVenta();
+    System.out.println("\nComprobante de venta num.: " + folio);
     System.out.println("Fecha de compra: " + fecha);
     System.out.println("Lista de productos: ");
     for (int i = 0; i < listaProductos.size(); i++) {
-      prod = listaProductos.get(i);
-      System.out.println("Artículo: " + prod.getNombre() + "  Cantidad: " + prod.getExistencia()
-          + "  Precio unitario: " + prod.getPrecioCompra() + " pesos   Total del artículo: "
-          + prod.getTotal() + " pesos");
+      prodVenta = listaProductos.get(i);
+      System.out.println("Artículo: " + prodVenta.getNombre() + "  Cantidad: " + prodVenta.getCantidad()
+          + "  Precio unitario: " + prodVenta.getPrecioUnitario() + " pesos   Total del artículo: "
+          + prodVenta.getSubtotal() + " pesos");
     }
     System.out.println("Total de la compra: " + totalVenta);
   }
 
+  public void setFolio() throws IOException{
+    FolioVentas fv = new FolioVentas();
+    this.folio = Integer.valueOf(FolioVentas.getC());         
+    FolioVentas.addCont(String.valueOf(this.folio));
+  }
+  
 }
