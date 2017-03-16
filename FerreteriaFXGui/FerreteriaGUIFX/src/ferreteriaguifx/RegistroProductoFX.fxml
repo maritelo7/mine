@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="registroProdPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ferreteriaguifx.RegistroProductoFXController">
+  <children>
+    <Label layoutX="35.0" layoutY="29.0" text="Registro de un nuevo producto">
+      <font>
+        <Font name="Tahoma" size="16.0" />
+      </font>
+    </Label>
+    <Label layoutX="86.0" layoutY="94.0" text="Nombre" />
+    <Label layoutX="86.0" layoutY="140.0" text="Descripción" />
+    <Label layoutX="86.0" layoutY="184.0" text="Existencia" />
+    <Label layoutX="86.0" layoutY="223.0" text="Precio unitario de compra" />
+    <Label layoutX="86.0" layoutY="273.0" text="Unidad de medida" />
+    <TextField fx:id="existencia" layoutX="239.0" layoutY="181.0" prefWidth="200.0" />
+    <TextField id="precio" fx:id="precioCompra" layoutX="239.0" layoutY="226.0" prefWidth="200.0" />
+    <TextField fx:id="descripcion" layoutX="239.0" layoutY="137.0" prefWidth="200.0" />
+    <TextField fx:id="nombre" layoutX="239.0" layoutY="91.0" prefWidth="200.0" />
+    <TextField fx:id="unidadMedida" layoutX="239.0" layoutY="273.0" prefWidth="200.0" />
+    <Button fx:id="cancelarB" layoutX="483.0" layoutY="343.0" mnemonicParsing="false" onAction="#cerrarRegistroProd" prefHeight="23.0" prefWidth="78.0" text="Regresar" />
+    <Button fx:id="registrarB" layoutX="261.0" layoutY="343.0" mnemonicParsing="false" onAction="#registrarProd" prefHeight="23.0" prefWidth="78.0" text="Registrar" />
+    <Label layoutX="88.0" layoutY="239.0" text="en pesos" />
+  </children>
+</AnchorPane>
