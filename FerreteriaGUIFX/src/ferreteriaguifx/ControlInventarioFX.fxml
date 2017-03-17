@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ferreteriaguifx.ControlInventarioFXController">
+  <children>
+    <AnchorPane layoutX="1.0" layoutY="1.0" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+      <children>
+        <Button fx:id="ordenarNombreB" layoutX="519.0" layoutY="40.0" mnemonicParsing="false" onAction="#ordenarInventarioNombre" text="Ordenar por nombre" />
+      </children>
+    </AnchorPane>
+    <AnchorPane layoutX="18.0" layoutY="314.0" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="598.0">
+      <children>
+        <Button fx:id="buscarNombreB" layoutX="424.0" layoutY="22.0" mnemonicParsing="false" onAction="#desplegarProdNombre" text="Buscar" />
+        <Label layoutX="41.0" layoutY="22.0" text="Nombre:" />
+        <Label layoutX="56.0" layoutY="64.0" text="Clave:" />
+        <Label layoutX="26.0" layoutY="106.0" text="Descripción" />
+        <Button fx:id="buscarClaveB" layoutX="424.0" layoutY="62.0" mnemonicParsing="false" onAction="#desplegarProdClave" text="Buscar" />
+        <Button fx:id="buscarDescripcionB" layoutX="424.0" layoutY="101.0" mnemonicParsing="false" onAction="#desplegarProdDescripcion" text="Buscar" />
+        <TextField fx:id="nombreTF" layoutX="99.0" layoutY="22.0" prefWidth="301.0" />
+        <TextField fx:id="claveTF" layoutX="99.0" layoutY="64.0" prefWidth="301.0" />
+        <TextField fx:id="descripcionTF" layoutX="99.0" layoutY="103.0" prefWidth="300.9999000000025" />
+        <Button fx:id="regresarB" layoutX="549.0" layoutY="135.0" minWidth="55.0" mnemonicParsing="false" onAction="#cerrarInventario" prefHeight="22.0" prefWidth="71.0" text="Salir">
+          <font>
+            <Font size="12.0" />
+          </font>
+        </Button>
+      </children>
+    </AnchorPane>
+    <Label layoutX="27.0" layoutY="26.0" text="CONSULTAR INVENTARIO">
+      <font>
+        <Font name="Tahoma" size="14.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="37.0" layoutY="276.0" text="BUSCAR ARTÍCULO POR:" />
+    <Label layoutX="375.0" layoutY="248.0" text="Valor total del inventario:" />
+    <TextArea id="totalInventario" fx:id="totalInventarioTF" layoutX="520.0" layoutY="242.0" prefHeight="28.0" prefWidth="106.0" wrapText="true" />
+    <TextArea fx:id="infoArea" layoutX="37.0" layoutY="76.0" prefHeight="146.0" prefWidth="630.0" wrapText="true" />
+  </children>
+</AnchorPane>

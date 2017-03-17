@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="150.0" prefWidth="200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ferreteriaguifx.PopUpEliminarFXController">
+  <children>
+    <Label layoutX="48.0" layoutY="44.0" text="¡Artículo eliminado!" />
+    <Button fx:id="aceptarB" layoutX="72.0" layoutY="94.0" mnemonicParsing="false" onAction="#cerrarPopUpEliminar" text="Aceptar" />
+  </children>
+</AnchorPane>

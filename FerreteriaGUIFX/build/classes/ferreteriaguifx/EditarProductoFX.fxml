@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ferreteriaguifx.EditarProductoFXController">
+  <children>
+    <Label layoutX="33.0" layoutY="23.0" text="Editar información de producto">
+      <font>
+        <Font size="16.0" />
+      </font>
+    </Label>
+    <TextField fx:id="nombre" layoutX="186.0" layoutY="176.0" prefWidth="200.0" />
+    <TextField fx:id="descripcion" layoutX="186.0" layoutY="217.0" prefWidth="200.0" />
+    <TextField fx:id="existencia" layoutX="186.0" layoutY="259.0" prefWidth="200.0" />
+    <TextField fx:id="precioCompra" layoutX="186.0" layoutY="300.0" prefWidth="200.0" />
+    <TextField fx:id="unidadMed" layoutX="186.0" layoutY="344.0" prefWidth="200.0" />
+    <Label layoutX="117.0" layoutY="179.0" text="Nombre" />
+    <Label layoutX="98.0" layoutY="223.0" text="Descripción" />
+    <Label layoutX="108.0" layoutY="265.0" text="Existencia" />
+    <Label layoutX="78.0" layoutY="303.0" text="Precio de compra" />
+    <Label layoutX="75.0" layoutY="344.0" text="Unidad de medida" />
+    <Label layoutX="33.0" layoutY="137.0" text="Sólo reescriba los  atributos que desea cambiar">
+      <font>
+        <Font size="14.0" />
+      </font>
+    </Label>
+    <Button fx:id="guardarCambiosB" layoutX="426.0" layoutY="228.0" mnemonicParsing="false" onAction="#guardarInfo" text="Guardar cambios" />
+    <Button fx:id="cancelarB" layoutX="453.0" layoutY="290.0" mnemonicParsing="false" onAction="#cerrarEditarProd" text="Regresar" />
+    <TextArea fx:id="infoProd" layoutX="34.0" layoutY="47.0" prefHeight="74.0" prefWidth="518.0" wrapText="true" />
+  </children>
+</AnchorPane>

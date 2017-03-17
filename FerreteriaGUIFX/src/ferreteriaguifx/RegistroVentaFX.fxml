@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" fx:id="registroVentaPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ferreteriaguifx.RegistroVentaFXController">
+  <children>
+    <Label layoutX="26.0" layoutY="28.0" text="Registro de una venta">
+      <font>
+        <Font size="16.0" />
+      </font>
+    </Label>
+    <Label layoutX="36.0" layoutY="78.0" text="Clave del producto:">
+      <font>
+        <Font size="12.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" layoutX="265.0" layoutY="78.0" text="Cantidad de artículos:" />
+    <Button fx:id="aniadirCompraB" layoutX="188.0" layoutY="118.0" mnemonicParsing="false" onAction="#aniadirProd" text="Añadir a carrito de compras" />
+    <TextField fx:id="cantidad" layoutX="400.0" layoutY="78.0" prefWidth="138.0" />
+    <Button fx:id="fianlizarVentaB" layoutX="282.0" layoutY="341.0" mnemonicParsing="false" onAction="#registrarVenta" text="Finalizar venta" />
+    <Label font="$x1" layoutX="36.0" layoutY="348.0" text="Total: " />
+    <TextField fx:id="clave" layoutX="155.0" layoutY="75.0" prefWidth="83.0" />
+    <TextField fx:id="total" layoutX="80.0" layoutY="346.0" prefWidth="96.0" />
+    <Label font="$x1" layoutX="181.0" layoutY="349.0" text="pesos" />
+    <Button fx:id="regresarB" layoutX="458.0" layoutY="341.0" mnemonicParsing="false" onAction="#cerrarRegistroVenta" text="Regresar" />
+    <TextArea fx:id="areaLista" layoutX="36.0" layoutY="160.0" prefHeight="158.0" prefWidth="509.0" wrapText="true" />
+  </children>
+</AnchorPane>

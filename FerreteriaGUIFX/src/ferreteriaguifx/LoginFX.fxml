@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" mouseTransparent="false" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ferreteriaguifx.LoginFXController">
+  <children>
+    <Label id="tituloFerreteria" layoutX="116.0" layoutY="49.0" prefHeight="52.0" prefWidth="-1.0" text="FERRETERÍA  &quot;EL SOLAR&quot;" textAlignment="LEFT" textOverrun="ELLIPSIS" underline="false" wrapText="false">
+      <font>
+        <Font name="Corbel" size="24.0" />
+      </font>
+    </Label>
+    <Button fx:id="login" layoutX="274.0" layoutY="315.0" mouseTransparent="false" onAction="#entrarSistema" text="Entrar" textFill="BLACK" wrapText="false" />
+    <Label id="usuario" layoutX="161.0" layoutY="189.0" text="Usuario" />
+    <Label id="contrasenia" layoutX="142.0" layoutY="222.0" text="Contraseña" />
+    <TextField fx:id="user" layoutX="226.0" layoutY="183.0" prefWidth="200.0" promptText="Username" />
+    <PasswordField fx:id="password" layoutX="226.0" layoutY="222.0" prefWidth="200.0" promptText="Password" />
+    <Label id="symbol" layoutX="35.0" layoutY="20.0" minHeight="84.0" prefHeight="84.0" prefWidth="77.0" text="❂">
+      <font>
+        <Font size="70.0" />
+      </font>
+    </Label>
+  </children>
+</AnchorPane>
